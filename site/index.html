@@ -109,5 +109,15 @@ footer a:hover{text-decoration:underline}
   <div><a href="https://github.com/Tourniercy/fine-volume-tuner" target="_blank" rel="noopener">GitHub</a> · APK signé, mis à jour à chaque release</div>
 </footer>
 </div>
+<script type="module">
+import * as Sentry from "https://cdn.jsdelivr.net/npm/@sentry/browser@8/+esm";
+Sentry.init({
+  dsn: "https://3f642aa7c19a47d9a13d6d7badd7992a@errors.rilcy.app/15",
+  environment: "production",
+});
+window.onerror = (msg, src, line, col, err) =>
+  Sentry.captureException(err ?? new Error(String(msg)));
+window.onunhandledrejection = (e) => Sentry.captureException(e.reason);
+</script>
 </body>
 </html>
